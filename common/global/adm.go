@@ -1,8 +1,12 @@
 package global
 
-import "gorm.io/gorm"
+import (
+	"go-application/common/config"
 
-// var Cfg config.Conf = config.DefaultConfig()
+	"gorm.io/gorm"
+)
+
+var Cfg config.Conf = config.DefaultConfig()
 
 var Eloquent *gorm.DB
 

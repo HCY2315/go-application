@@ -4,8 +4,9 @@ import (
 	"errors"
 	"os"
 
-	"github.com/spf13/cobra"
 	"go-application/cmd/api"
+
+	"github.com/spf13/cobra"
 )
 
 var rootCmd = &cobra.Command{
