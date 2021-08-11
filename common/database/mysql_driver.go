@@ -3,11 +3,14 @@ package database
 import (
 	"database/sql"
 	"fmt"
+	"go-application/app/admin/models"
 	"go-application/common/config"
 	"go-application/common/global"
 	toolsconfig "go-application/tools/config"
+	"sync"
 
 	"go-application/common/log"
+
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 	"gorm.io/gorm/schema"
@@ -15,6 +18,8 @@ import (
 
 // mysql 结构体
 type Mysql struct {
+	initOne sync.Once
+	models  []TableInterface
 }
 
 func (e *Mysql) Setup() {
@@ -43,7 +48,26 @@ func (e *Mysql) Setup() {
 		fmt.Println("connect success!!!")
 	}
 
-	// TODO: 自动注册数据库中的表
+	// 注册表
+	e.RegisterTableModel()
+	e.CheckTable()
+}
+
+// CheckTable 检查表结构
+func (e *Mysql) CheckTable() {
+	e.initOne.Do(func() {
+		for _, md := range e.models {
+			// TODO: 判断当前表是否存在
+
+			log.Info("insert: ", md.TableName())
+			global.Eloquent.AutoMigrate(md)
+		}
+	})
+}
+
+// RegisterTableModel 注册表结构
+func (e *Mysql) RegisterTableModel() {
+	e.models = append(e.models, &models.SysUser{})
 }
 
 // 打开数据库连接
