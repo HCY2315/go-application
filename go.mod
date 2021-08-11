@@ -3,6 +3,7 @@ module go-application
 go 1.15
 
 require (
+	github.com/go-admin-team/go-admin-core v1.3.7
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/viper v1.8.1
 	go.opentelemetry.io/otel/metric v0.22.0
