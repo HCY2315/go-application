@@ -1,12 +1,13 @@
 package models
 
+import "gorm.io/gorm"
+
 type UserName struct {
-	Username string `gorm:"size:64" json:"username"`
+	Username string `json:"username" gorm:"size:64;comment:用户名"`
 }
 
 type PassWord struct {
-	// 密码
-	Password string `gorm:"size:128" json:"password"`
+	Password string `json:"password" gorm:"size:128;comment:密码"`
 }
 
 type LoginM struct {
@@ -15,6 +16,7 @@ type LoginM struct {
 }
 
 type SysUser struct {
+	gorm.Model
 	LoginM
 }
 
