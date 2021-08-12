@@ -2,10 +2,10 @@ package database
 
 import (
 	"database/sql"
-	"fmt"
 	"go-application/app/admin/models"
 	"go-application/common/config"
 	"go-application/common/global"
+	"go-application/tools"
 	toolsconfig "go-application/tools/config"
 	"sync"
 
@@ -24,12 +24,12 @@ type Mysql struct {
 
 func (e *Mysql) Setup() {
 	global.Source = e.GetConnect()
-	// log.Info(tools.Green(global.Source))
 
 	db, err := sql.Open("mysql", global.Source)
 	if err != nil {
-		log.Error(e.GetDriver(), "connect failed, err:", err)
+		log.Error(tools.Red(e.GetDriver()+"connect error:"), err)
 	}
+
 	global.Cfg.SetDb(&config.DBConfig{
 		Driver: "mysql",
 		DB:     db,
@@ -42,10 +42,9 @@ func (e *Mysql) Setup() {
 	})
 
 	if err != nil {
-		log.Fatal((e.GetDriver() + " connect error :"), err)
+		log.Fatal((tools.Red(e.GetDriver() + " connect error :")), err)
 	} else {
-		log.Info(e.GetDriver() + " connect success !")
-		fmt.Println("connect success!!!")
+		log.Info(tools.Green(e.GetDriver() + " connect success !"))
 	}
 
 	// 注册表
@@ -57,9 +56,7 @@ func (e *Mysql) Setup() {
 func (e *Mysql) CheckTable() {
 	e.initOne.Do(func() {
 		for _, md := range e.models {
-			// TODO: 判断当前表是否存在
-
-			log.Info("insert: ", md.TableName())
+			log.Info(tools.Green("insert: " + md.TableName()))
 			global.Eloquent.AutoMigrate(md)
 		}
 	})
