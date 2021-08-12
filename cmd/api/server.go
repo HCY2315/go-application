@@ -3,6 +3,7 @@ package api
 import (
 	"fmt"
 	"go-application/common/database"
+	"go-application/pkg/cache"
 	"go-application/tools/config"
 
 	"github.com/spf13/cobra"
@@ -33,8 +34,10 @@ func setup() {
 	config.Setup(configYml)
 
 	//2. 启动数据库
-	fmt.Println(config.DatabaseConfig.Driver)
 	database.Setup(config.DatabaseConfig.Driver)
+
+	//3. 启动缓存服务器
+	cache.SetUp()
 }
 
 func run() error {

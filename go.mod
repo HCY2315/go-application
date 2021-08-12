@@ -3,7 +3,9 @@ module go-application
 go 1.15
 
 require (
+	github.com/astaxie/beego v1.12.3
 	github.com/go-admin-team/go-admin-core v1.3.7
+	github.com/gomodule/redigo v2.0.0+incompatible
 	github.com/influxdata/influxdb1-client v0.0.0-20200827194710-b269163b24ab
 	github.com/spf13/cobra v1.2.1
 	github.com/spf13/viper v1.8.1
