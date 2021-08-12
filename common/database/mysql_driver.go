@@ -16,12 +16,12 @@ import (
 	"gorm.io/gorm/schema"
 )
 
-// mysql 结构体
 type Mysql struct {
 	initOne sync.Once
 	models  []TableInterface
 }
 
+// Setup 初始化数据库
 func (e *Mysql) Setup() {
 	global.Source = e.GetConnect()
 
