@@ -4,6 +4,9 @@ go 1.15
 
 require (
 	github.com/astaxie/beego v1.12.3
+	github.com/casbin/casbin v1.7.0
+	github.com/casbin/casbin/v2 v2.28.3
+	github.com/casbin/gorm-adapter/v3 v3.3.3
 	github.com/go-admin-team/go-admin-core v1.3.7
 	github.com/gomodule/redigo v2.0.0+incompatible
 	github.com/influxdata/influxdb1-client v0.0.0-20200827194710-b269163b24ab

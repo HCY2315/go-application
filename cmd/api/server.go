@@ -3,7 +3,11 @@ package api
 import (
 	"fmt"
 	"go-application/common/database"
+	"go-application/common/global"
+	"go-application/common/log"
 	"go-application/pkg/cache"
+	mycasbin "go-application/pkg/casbin"
+	"go-application/tools"
 	"go-application/tools/config"
 
 	"github.com/spf13/cobra"
@@ -38,6 +42,12 @@ func setup() {
 
 	//3. 启动缓存服务器
 	cache.SetUp()
+
+	//4. 接口访问控制加载
+	global.CasbinEnforcer = mycasbin.Setup(global.Eloquent, "sys", "casbin")
+
+	usageStr := `starting api server !!!`
+	log.Info("\n" + tools.Green(usageStr))
 }
 
 func run() error {
