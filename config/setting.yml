@@ -1,4 +1,8 @@
 settings:
+  application:
+    model: dev
+    host: 0.0.0.0
+    port: 8008
   database:
     # 数据库类型 mysql
     driver: mysql

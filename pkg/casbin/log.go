@@ -20,7 +20,7 @@ func (l *Logger) IsEnabled() bool {
 	return atomic.LoadInt32(&(l.enable)) != 0
 }
 
-// TODO: 丰富以下方法
+// TODO: 丰富以下四个方法
 
 // LogModel log info related to model.
 func (l *Logger) LogModel(model [][]string) {

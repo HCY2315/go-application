@@ -16,6 +16,9 @@ var cfgDatabase *viper.Viper
 // redis 连接
 var cfgRedis *viper.Viper
 
+// application 配置
+var cfgApplication *viper.Viper
+
 func Setup(path string) {
 	// 显式定义配置文件的路径、名称和扩展名
 	viper.SetConfigFile(path)
@@ -45,7 +48,11 @@ func Setup(path string) {
 	if cfgRedis == nil {
 		panic("No found settings.redis in the configuration")
 	}
-
 	RedisConfig = InitRedis(cfgRedis)
 
+	cfgApplication = viper.Sub("settings.application")
+	if cfgApplication == nil {
+		panic("No found settings.application in the configuration")
+	}
+	ApplicationConfig = InitApplication(cfgApplication)
 }
