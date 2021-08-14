@@ -60,15 +60,11 @@ func setup() {
 }
 
 func run() error {
-	if config.ApplicationConfig.Model == string(tools.ModelPord) {
+	if config.ApplicationConfig.Model == tools.ModelPord {
 		gin.SetMode(gin.ReleaseMode)
 	}
-	engine := global.Cfg.GetEngine()
-	if engine == nil {
-		engine = gin.New()
-	}
 
-	if config.ApplicationConfig.Model == string(tools.ModelDev) {
+	if config.ApplicationConfig.Model == tools.ModelDev {
 		// 添加监控
 		AppRouters = append(AppRouters, router.Monitor)
 	}
