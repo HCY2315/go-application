@@ -17,9 +17,9 @@ func Monitor() {
 		h = gin.New()
 		global.Cfg.SetEngine(h)
 	}
-	switch h.(type) {
+	switch h := h.(type) {
 	case *gin.Engine:
-		r = h.(*gin.Engine)
+		r = h
 	default:
 		log.Fatal(tools.Red("not support other engine"))
 	}
