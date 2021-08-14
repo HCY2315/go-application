@@ -25,9 +25,9 @@ func (c *Config) GetDb() *DBConfig {
 	return c.db
 }
 
-// SetEnging 设置引擎
-func (c *Config) SetEngine(enging http.Handler) {
-	c.engine = enging
+// SetEngine 设置引擎
+func (c *Config) SetEngine(engine http.Handler) {
+	c.engine = engine
 }
 
 // GetEngine 获取引擎

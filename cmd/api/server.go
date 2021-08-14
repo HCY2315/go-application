@@ -53,6 +53,8 @@ func setup() {
 	//4. 接口访问控制加载
 	global.CasbinEnforcer = mycasbin.Setup(global.Eloquent, "sys", "casbin")
 
+	//5. 注册路由
+	AppRouters = append(AppRouters, router.InitRouter)
 	usageStr := `starting api server !!!`
 	log.Info("\n" + tools.Green(usageStr))
 }
@@ -75,6 +77,7 @@ func run() error {
 		f()
 	}
 
+	// 服务连接
 	srv := &http.Server{
 		Addr:    config.ApplicationConfig.Host + ":" + config.ApplicationConfig.Port,
 		Handler: global.Cfg.GetEngine(),
@@ -84,9 +87,12 @@ func run() error {
 			log.Fatal("listen: ", err)
 		}
 	}()
+
+	// 关闭服务
 	quit := make(chan os.Signal)
 	signal.Notify(quit, os.Interrupt)
 	<-quit
+
 	fmt.Println("关闭服务")
 	return fmt.Errorf("aa")
 }
