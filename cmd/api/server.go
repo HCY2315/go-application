@@ -89,6 +89,6 @@ func run() error {
 	signal.Notify(quit, os.Interrupt)
 	<-quit
 
-	fmt.Println("关闭服务")
+	fmt.Println("\n 正在关闭服务 ！！！！！")
 	return fmt.Errorf("aa")
 }
