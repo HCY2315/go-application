@@ -1,6 +1,7 @@
 package router
 
 import (
+	"go-application/app/admin/middleware"
 	"go-application/common/global"
 	"go-application/common/log"
 	"go-application/tools"
@@ -27,6 +28,8 @@ func InitRouter() {
 
 	// 跨域
 	r.Use(cors())
+	middleware.GetOrmFromConfig(global.Cfg)
+
 }
 
 func cors() gin.HandlerFunc {

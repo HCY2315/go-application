@@ -1,5 +1,7 @@
 package apis
 
-// type ApiSysUser struct {
-// 	apis.Api
-// }
+import "go-application/common/apis"
+
+type ApiSysUser struct {
+	apis.Api
+}

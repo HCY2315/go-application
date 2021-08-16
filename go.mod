@@ -22,5 +22,6 @@ require (
 	golang.org/x/text v0.3.5
 	google.golang.org/genproto v0.0.0-20210602131652-f16073e35f0c
 	gorm.io/driver/mysql v1.1.1
+	gorm.io/driver/postgres v1.0.8
 	gorm.io/gorm v1.21.12
 )
