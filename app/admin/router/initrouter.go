@@ -35,11 +35,16 @@ func InitRouter() {
 	// TODO：限流
 
 	// TODO：初始化中间件
+	var err error
+	authMiddleware, err := middleware.AuthJwt()
+	if err != nil {
+		log.Error(err)
+	}
 
 	// TODO：注册系统路由
 
 	// 注册业务路由
-
+	InitBusinessRouter(r, authMiddleware)
 }
 
 func cors() gin.HandlerFunc {

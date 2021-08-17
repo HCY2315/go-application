@@ -7,6 +7,7 @@ require (
 	github.com/casbin/casbin v1.7.0
 	github.com/casbin/casbin/v2 v2.28.3
 	github.com/casbin/gorm-adapter/v3 v3.3.3
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.7.2
 	github.com/go-admin-team/go-admin-core v1.3.7
 	github.com/gofrs/uuid v3.2.0+incompatible

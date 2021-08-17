@@ -19,6 +19,9 @@ var cfgRedis *viper.Viper
 // application 配置
 var cfgApplication *viper.Viper
 
+// jwtconfig 配置
+var cfgJwt *viper.Viper
+
 func Setup(path string) {
 	// 显式定义配置文件的路径、名称和扩展名
 	viper.SetConfigFile(path)
@@ -55,4 +58,10 @@ func Setup(path string) {
 		panic("No found settings.application in the configuration")
 	}
 	ApplicationConfig = InitApplication(cfgApplication)
+
+	cfgJwt = viper.Sub("settings.jwt")
+	if cfgJwt == nil {
+		panic("No found settings.jwtconfig in the configuration")
+	}
+	JwtConfig = InitJwt(cfgJwt)
 }

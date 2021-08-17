@@ -4,6 +4,9 @@ settings:
     model: dev
     host: 0.0.0.0
     port: 8008
+  jwt:
+    # 认证过期时间(秒)
+    timeout: 600
   database:
     # 数据库类型 mysql
     driver: mysql
