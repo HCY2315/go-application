@@ -21,7 +21,7 @@ type LoginM struct {
 }
 
 type SysUser struct {
-	Model
+	BaseModel
 	LoginM
 	Photo string `json:"password" gorm:"type:int(11);size:32;comment:手机号"`
 	Sex   string `json:"sex" gorm:"type:int(1);size:32;comment:性别"`
