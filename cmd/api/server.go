@@ -83,7 +83,6 @@ func run() error {
 			log.Fatal("listen: ", err)
 		}
 	}()
-
 	// 关闭服务
 	quit := make(chan os.Signal, 1)
 	signal.Notify(quit, os.Interrupt)

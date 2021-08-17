@@ -28,7 +28,17 @@ func InitRouter() {
 
 	// 跨域
 	r.Use(cors())
-	middleware.GetOrmFromConfig(global.Cfg)
+
+	// 生成数据库连接
+	r.Use(middleware.WithCountextDb(middleware.GetOrmFromConfig(global.Cfg)))
+
+	// TODO：限流
+
+	// TODO：初始化中间件
+
+	// TODO：注册系统路由
+
+	// 注册业务路由
 
 }
 
