@@ -1,17 +1,18 @@
 package models
 
 import (
-	"go-application/common/global"
+	"go-application/common/log"
+	"go-application/tools"
 
-	"gorm.io/gorm"
+	"github.com/gin-gonic/gin"
 )
 
 type UserName struct {
-	Username string `json:"username" gorm:"size:64;comment:用户名"`
+	Username string `json:"username" gorm:"type:varchar(32);size:64;comment:用户名"`
 }
 
 type PassWord struct {
-	Password string `json:"password" gorm:"size:128;comment:密码"`
+	Password string `json:"password" gorm:"type:varchar(32);size:128;comment:密码"`
 }
 
 type LoginM struct {
@@ -20,8 +21,10 @@ type LoginM struct {
 }
 
 type SysUser struct {
-	gorm.Model
+	Model
 	LoginM
+	Photo string `json:"password" gorm:"type:int(11);size:32;comment:手机号"`
+	Sex   string `json:"sex" gorm:"type:int(1);size:32;comment:性别"`
 }
 
 func (SysUser) TableName() string {
@@ -29,10 +32,14 @@ func (SysUser) TableName() string {
 }
 
 // 获取用户列表 GetAllUserList
-func (e *SysUser) GetAllUserList() ([]*SysUser, error) {
-	table := global.Eloquent.Table(e.TableName())
+func (e *SysUser) GetAllUserList(c *gin.Context) ([]*SysUser, error) {
+	db, err := tools.GetOrm(c)
+	if err != nil {
+		log.Error("获取数据库控制权失败！err", err)
+		return nil, err
+	}
 	var userList []*SysUser
-	if err := table.Where("").Find(&userList).Error; err != nil {
+	if err := db.Debug().Find(&userList).Error; err != nil {
 		return nil, err
 	}
 	return userList, nil

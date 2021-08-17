@@ -5,7 +5,7 @@ import (
 	jwt "go-application/pkg/jwtauth"
 )
 
-var routerNoCheckRole = make([]func(*gin.RouterGroup), 0)
+var routerNoCheckRoleV1 = make([]func(*gin.RouterGroup), 0)
 
 // 初始化业务路由 InitBusinessRouter
 func InitBusinessRouter(r *gin.Engine, authMiddleware *jwt.GinJWTMiddleware) *gin.Engine {
@@ -25,7 +25,7 @@ func BusinessNoCheckRoleRouter(r *gin.Engine) {
 	// 测试接口
 	v1.GET("checknorole", nil)
 
-	for _, f := range routerNoCheckRole {
+	for _, f := range routerNoCheckRoleV1 {
 		f(v1)
 	}
 }

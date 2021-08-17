@@ -7,13 +7,13 @@ import (
 )
 
 func init() {
-	routerNoCheckRole = append(routerNoCheckRole, registerSysUser)
+	routerNoCheckRoleV1 = append(routerNoCheckRoleV1, registerSysUser)
 }
 
 func registerSysUser(v1 *gin.RouterGroup) {
 	r1 := v1.Group("/sysuser")
 	{
 		sysUserApi := &apis.ApiSysUser{}
-		r1.GET("/list", sysUserApi.GetAll)
+		r1.POST("/list", sysUserApi.GetAll)
 	}
 }

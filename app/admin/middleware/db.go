@@ -14,7 +14,7 @@ var WithCountextDb = middleware.WithCountextDb
 
 func GetOrmFromConfig(cfg config.Conf) map[string]*gorm.DB {
 	gormDBs := make(map[string]*gorm.DB)
-	// TODO: 对类数据库连接
+	// TODO: 对多数据库连接
 
 	// 生成单独的数据库连接
 	c := cfg.GetDb()
