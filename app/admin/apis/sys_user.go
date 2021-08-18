@@ -1,10 +1,10 @@
 package apis
 
 import (
-	"fmt"
-	"go-application/app/admin/service"
+	"go-application/app/admin/models"
 	"go-application/common/apis"
 	"go-application/common/log"
+	"go-application/tools"
 
 	"github.com/gin-gonic/gin"
 )
@@ -14,20 +14,18 @@ type ApiSysUser struct {
 }
 
 func (e *ApiSysUser) GetAll(c *gin.Context) {
-	sysUserParam := new(service.SerSysUser)
-	err := c.Bind(sysUserParam)
+	sysUser := new(models.SysUser)
+	msgID := tools.GenerateMsgIDFromContext(c)
+	db, err := tools.GetOrm(c)
 	if err != nil {
-		log.Error("参数错误", err)
-		e.Error(c, 404, nil, "参数错误")
+		log.Errorf("获取数据库控制权失败！err", err)
 		return
 	}
-
-	list, err := sysUserParam.GetAllUserList(c)
+	list, err := sysUser.GetAllUserList(db)
 	if err != nil {
-		log.Error("获取数据失败", err)
+		log.Errorf("MsgID[%s]获取数据失败, err:", msgID, err)
 		e.Error(c, 404, nil, "获取数据失败")
 		return
 	}
-	fmt.Println(c.Get("db"))
 	e.Ok(c, list, "")
 }

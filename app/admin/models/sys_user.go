@@ -1,10 +1,7 @@
 package models
 
 import (
-	"go-application/common/log"
-	"go-application/tools"
-
-	"github.com/gin-gonic/gin"
+	"gorm.io/gorm"
 )
 
 type UserName struct {
@@ -32,12 +29,7 @@ func (SysUser) TableName() string {
 }
 
 // 获取用户列表 GetAllUserList
-func (e *SysUser) GetAllUserList(c *gin.Context) ([]*SysUser, error) {
-	db, err := tools.GetOrm(c)
-	if err != nil {
-		log.Error("获取数据库控制权失败！err", err)
-		return nil, err
-	}
+func (e *SysUser) GetAllUserList(db *gorm.DB) ([]*SysUser, error) {
 	var userList []*SysUser
 	if err := db.Debug().Find(&userList).Error; err != nil {
 		return nil, err
