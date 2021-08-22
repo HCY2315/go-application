@@ -5,11 +5,11 @@ import (
 )
 
 type UserName struct {
-	Username string `json:"username" gorm:"type:varchar(32);size:64;comment:用户名"`
+	Username string `json:"username" gorm:"type:varchar(32);comment:用户名"`
 }
 
 type PassWord struct {
-	Password string `json:"password" gorm:"type:varchar(32);size:128;comment:密码"`
+	Password string `json:"password" gorm:"type:varchar(32);comment:密码"`
 }
 
 type LoginM struct {
@@ -20,8 +20,9 @@ type LoginM struct {
 type SysUser struct {
 	BaseModel
 	LoginM
-	Photo string `json:"password" gorm:"type:int(11);size:32;comment:手机号"`
-	Sex   string `json:"sex" gorm:"type:int(1);size:32;comment:性别"`
+	Photo       int `json:"password" gorm:"type:int(11);comment:手机号"`
+	Sex         int `json:"sex" gorm:"type:int(1);comment:性别"`
+	ClassRoomId int `json:"class_room_id" gorm:"type:int(11);comment:教室id"`
 }
 
 func (SysUser) TableName() string {

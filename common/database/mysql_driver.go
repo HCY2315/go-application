@@ -65,6 +65,7 @@ func (e *Mysql) CheckTable() {
 // RegisterTableModel 注册表结构
 func (e *Mysql) RegisterTableModel() {
 	e.models = append(e.models, &models.SysUser{})
+	e.models = append(e.models, &models.OpClassRoom{})
 }
 
 // 打开数据库连接
