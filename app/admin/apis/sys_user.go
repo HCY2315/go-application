@@ -13,15 +13,17 @@ type ApiSysUser struct {
 	apis.Api
 }
 
-func (e *ApiSysUser) GetAll(c *gin.Context) {
-	sysUser := new(models.SysUser)
+func (e *ApiSysUser) GetNotPage(c *gin.Context) {
+	data := new(models.SysUser)
 	msgID := tools.GenerateMsgIDFromContext(c)
-	db, err := tools.GetOrm(c)
+	_, err := tools.GetOrm(c)
 	if err != nil {
 		log.Errorf("获取数据库控制权失败！err", err)
 		return
 	}
-	list, err := sysUser.GetAllUserList(db)
+
+	data.UserName.UserName = c.Request.FormValue("user_name")
+	list, err := data.GetUserNoPage()
 	if err != nil {
 		log.Errorf("MsgID[%s]获取数据失败, err:", msgID, err)
 		e.Error(c, 404, nil, "获取数据失败")
