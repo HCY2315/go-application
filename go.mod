@@ -10,7 +10,6 @@ require (
 	github.com/go-admin-team/go-admin-core v1.3.8
 	github.com/gomodule/redigo v1.8.5
 	github.com/google/uuid v1.3.0
-	github.com/mojocn/base64Captcha v1.3.5
 	github.com/prometheus/client_golang v1.11.0
 	github.com/spf13/cast v1.4.1
 	github.com/spf13/cobra v1.2.1
