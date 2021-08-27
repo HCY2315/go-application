@@ -37,19 +37,19 @@ type SysUserId struct {
 }
 
 type SysUserB struct {
-	NickName string `gorm:"size:128;comment:昵称" json:"nick_name"`       // 昵称
-	Phone    string `gorm:"size:11;comment:手机号" json:"phone"`           // 手机号
-	RoleId   int    `gorm:"comment:角色编码" json:"role_id"`                // 角色编码
-	Salt     string `gorm:"varchar(32);comment:盐;size:255" json:"salt"` // 盐
-	Avatar   string `gorm:"size:255;comment:头像" json:"avatar"`          // 头像
-	Sex      string `gorm:"size:255;comment:性别" json:"sex"`             // 性别
-	Email    string `gorm:"size:128;comment:邮箱" json:"email"`           // 邮箱
-	DeptId   int    `gorm:"comment:部门编码" json:"dept_id"`                // 部门编码
-	PostId   int    `gorm:"comment:职位编码" json:"post_id"`                // 职位编码
-	CreateBy string `gorm:"size:128;comment:创建人" json:"create_by"`      // 创建人
-	UpdateBy string `gorm:"size:128;comment:修改人" json:"update_by"`      // 修改人
-	Remark   string `gorm:"size:255;comment:备注" json:"remark"`          // 备注
-	Status   string `gorm:"size:4;comment:用户状态" json:"status"`          // 用户状态
+	NickName string `gorm:"size:128;comment:昵称" json:"nick_name"`        // 昵称
+	Phone    string `gorm:"size:11;comment:手机号" json:"phone"`            // 手机号
+	RoleId   int    `gorm:"comment:角色编码" json:"role_id"`                 // 角色编码
+	Salt     string `gorm:"varchar(32);comment:盐;size:255" json:"salt"`  // 盐
+	Avatar   string `gorm:"size:255;comment:头像" json:"avatar"`           // 头像
+	Sex      string `gorm:"size:255;default:1;comment:性别" json:"sex"`    // 性别	1:未知；2:男；3:女
+	Email    string `gorm:"size:128;comment:邮箱" json:"email"`            // 邮箱
+	DeptId   int    `gorm:"comment:部门编码" json:"dept_id"`                 // 部门编码
+	PostId   int    `gorm:"comment:职位编码" json:"post_id"`                 // 职位编码
+	CreateBy string `gorm:"size:128;comment:创建人" json:"create_by"`       // 创建人
+	UpdateBy string `gorm:"size:128;comment:修改人" json:"update_by"`       // 修改人
+	Remark   string `gorm:"size:255;comment:备注" json:"remark"`           // 备注
+	Status   string `gorm:"size:4;default:1;comment:用户状态" json:"status"` // 用户状态 1:开启，2:关闭
 	BaseModel
 
 	DataScope string `gorm:"-" json:"data_scope"`
