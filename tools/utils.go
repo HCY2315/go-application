@@ -6,6 +6,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
 	"github.com/spf13/cast"
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
 
@@ -35,4 +36,13 @@ func GetOrm(c *gin.Context) (*gorm.DB, error) {
 	default:
 		return nil, fmt.Errorf("msgID[%s], db connect not exist", msgID)
 	}
+}
+
+// CompareHashAndPassword 比较两个hash值是是否一样
+func CompareHashAndPassword(e string, p string) (bool, error) {
+	err := bcrypt.CompareHashAndPassword([]byte(e), []byte(p))
+	if err != nil {
+		return false, err
+	}
+	return true, nil
 }
