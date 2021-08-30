@@ -66,6 +66,7 @@ func (e *Mysql) CheckTable() {
 func (e *Mysql) RegisterTableModel() {
 	e.models = append(e.models, &models.SysUser{})
 	e.models = append(e.models, &models.OpClassRoom{})
+	e.models = append(e.models, &models.SysRole{})
 }
 
 // 打开数据库连接
