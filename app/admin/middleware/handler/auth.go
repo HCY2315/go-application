@@ -72,3 +72,17 @@ func Authenticator(c *gin.Context) (interface{}, error) {
 	}
 	return nil, jwt.ErrFailedAuthentication
 }
+
+func Authorizator(data interface{}, c *gin.Context) bool {
+	if v, ok := data.(map[string]interface{}); ok {
+		u, _ := v["user"].(models.SysUser)
+		r, _ := v["role"].(models.SysRole)
+		c.Set("role", r.RoleName)
+		c.Set("roleIds", r.RoleId)
+		c.Set("dataScope", r.DataScope)
+		c.Set("userId", u.UserId)
+		c.Set("userName", u.UserName)
+		return true
+	}
+	return false
+}
