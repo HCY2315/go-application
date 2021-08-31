@@ -5,7 +5,7 @@ go 1.17
 require (
 	github.com/casbin/casbin/v2 v2.36.1
 	github.com/casbin/gorm-adapter/v3 v3.3.3
-	github.com/dgrijalva/jwt-go v3.2.1+incompatible
+	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/gin-gonic/gin v1.7.4
 	github.com/go-admin-team/go-admin-core v1.3.8
 	github.com/gomodule/redigo v1.8.5
