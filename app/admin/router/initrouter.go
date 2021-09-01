@@ -35,11 +35,11 @@ func InitRouter() {
 	// TODO：限流
 
 	// TODO：初始化中间件
+
+	// web身份认证令牌
 	var err error
 	authMiddleware, err := middleware.AuthJwt()
-	if err != nil {
-		log.Error(err)
-	}
+	tools.HasError(err, "JWT Init Error", 500)
 
 	// TODO：注册系统路由
 
