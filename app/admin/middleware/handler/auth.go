@@ -5,6 +5,7 @@ import (
 	"go-application/app/admin/models"
 	jwt "go-application/pkg/jwtauth"
 	"go-application/tools/config"
+	"net/http"
 
 	"github.com/gin-gonic/gin"
 	"github.com/mojocn/base64Captcha"
@@ -85,4 +86,11 @@ func Authorizator(data interface{}, c *gin.Context) bool {
 		return true
 	}
 	return false
+}
+
+func Unauthorized(c *gin.Context, code int, message string) {
+	c.JSON(http.StatusOK, gin.H{
+		"code": code,
+		"msg":  message,
+	})
 }
