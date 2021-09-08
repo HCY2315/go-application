@@ -4,7 +4,7 @@ import (
 	"go-application/common/config"
 
 	"github.com/casbin/casbin/v2"
-	// "go-application/pkg/logger"
+	"go-application/pkg/logger"
 	"gorm.io/gorm"
 )
 
@@ -20,9 +20,9 @@ var (
 	DBName string
 )
 
-// TODO:日志系统
-// var (
-// 	Logger        = &logger.Logger{}
-// 	JobLogger     = &logger.Logger{}
-// 	RequestLogger = &logger.Logger{}
-// )
+// 日志系统
+var (
+	Logger        = &logger.Logger{}
+	JobLogger     = &logger.Logger{}
+	RequestLogger = &logger.Logger{}
+)

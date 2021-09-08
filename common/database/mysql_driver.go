@@ -42,7 +42,7 @@ func (e *Mysql) Setup() {
 	})
 
 	if err != nil {
-		log.Fatal((tools.Red(e.GetDriver() + " connect error :")), err)
+		log.Fatal((tools.Red(e.GetDriver() + " connect error:")), err)
 	} else {
 		log.Info(tools.Green(e.GetDriver() + " connect success "))
 	}

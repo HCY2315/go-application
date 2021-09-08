@@ -7,6 +7,8 @@ settings:
   jwt:
     # 认证过期时间(秒)
     timeout: 600
+    # token 密钥，生产环境时及的修改
+    secret: go-application
   database:
     # 数据库类型 mysql
     driver: mysql
