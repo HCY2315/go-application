@@ -1,14 +1,16 @@
 package models
 
+import orm "go-application/common/global"
+
 type Menu struct {
 	MenuId     int    `json:"menuId" gorm:"primary_key;AUTO_INCREMENT"`
 	MenuName   string `json:"menuName" gorm:"size:128;"`
 	Title      string `json:"title" gorm:"size:128;"`
 	Icon       string `json:"icon" gorm:"size:128;"`
-	Path       string `json:"path" gorm:"size:128;"`
+	Path       string `json:"path" gorm:"size:128;comment:接口"`
 	Paths      string `json:"paths" gorm:"size:128;"`
 	MenuType   string `json:"menuType" gorm:"size:1;"`
-	Action     string `json:"action" gorm:"size:16;"`
+	Action     string `json:"action" gorm:"size:16;comment:访问方法"`
 	Permission string `json:"permission" gorm:"size:255;"`
 	ParentId   int    `json:"parentId" gorm:"size:11;"`
 	NoCache    bool   `json:"noCache" gorm:"size:8;"`
@@ -29,4 +31,18 @@ type Menu struct {
 
 func (Menu) TableName() string {
 	return "sys_menu"
+}
+
+func (e *Menu) Get() (Menus []Menu, err error) {
+	table := orm.Eloquent.Table(e.TableName())
+	if e.Path != "" {
+		table = table.Where("path = ?", e.Path)
+	}
+	if e.Action != "" {
+		table = table.Where("action = ?", e.Action)
+	}
+	if err = table.Order("sort").Find(&Menus).Error; err != nil {
+		return
+	}
+	return
 }
