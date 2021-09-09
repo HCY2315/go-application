@@ -11,10 +11,9 @@ type Application struct {
 
 func InitApplication(cfg *viper.Viper) *Application {
 	app := &Application{
-		Model:     cfg.GetString("model"),
-		Host:      cfg.GetString("host"),
-		Port:      cfg.GetString("port"),
-		JwtSecret: cfg.GetString("jwtSecret"),
+		Model: cfg.GetString("model"),
+		Host:  cfg.GetString("host"),
+		Port:  cfg.GetString("port"),
 	}
 	return app
 }
