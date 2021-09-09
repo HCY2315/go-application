@@ -48,3 +48,8 @@ func LoggerToFile() gin.HandlerFunc {
 
 	}
 }
+
+// SetDBOperLog 写入操作日志表
+func SetDBOperLog(c *gin.Context, clientIP string, statusCode int, reqUri string, reqMethod string, latencyTime time.Duration) {
+
+}
