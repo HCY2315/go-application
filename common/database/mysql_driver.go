@@ -67,6 +67,7 @@ func (e *Mysql) RegisterTableModel() {
 	e.models = append(e.models, &models.SysUser{})
 	e.models = append(e.models, &models.OpClassRoom{})
 	e.models = append(e.models, &models.SysRole{})
+	e.models = append(e.models, &models.Menu{})
 }
 
 // 打开数据库连接
