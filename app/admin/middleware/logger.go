@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"go-application/app/admin/models"
 	"go-application/common/log"
 	"time"
 
@@ -51,5 +52,12 @@ func LoggerToFile() gin.HandlerFunc {
 
 // SetDBOperLog 写入操作日志表
 func SetDBOperLog(c *gin.Context, clientIP string, statusCode int, reqUri string, reqMethod string, latencyTime time.Duration) {
-
+	menu := models.Menu{}
+	menu.Path = reqUri
+	menu.Action = reqMethod
+	menuList, err := menu.Get()
+	if err != nil {
+		log.Error("获取菜单数据失败！err:", err)
+	}
+	log.Info("打印查询的菜单目录", menuList)
 }
