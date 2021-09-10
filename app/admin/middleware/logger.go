@@ -2,7 +2,10 @@ package middleware
 
 import (
 	"go-application/app/admin/models"
+	"go-application/app/admin/models/system"
 	"go-application/common/log"
+	"go-application/tools"
+	"go-application/tools/config"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -45,8 +48,10 @@ func LoggerToFile() gin.HandlerFunc {
 		}
 		log.Info(logData)
 
-		// TODO: 写入操作日志表
-
+		// 写入操作日志表
+		if c.Request.Method != "GET" && c.Request.Method != "OPTIONS" && config.LoggerConfig.EnabledDB {
+			SetDBOperLog(c, clientIP, statusCode, reqUri, reqMethod, latencyTime)
+		}
 	}
 }
 
@@ -58,6 +63,14 @@ func SetDBOperLog(c *gin.Context, clientIP string, statusCode int, reqUri string
 	menuList, err := menu.Get()
 	if err != nil {
 		log.Error("获取菜单数据失败！err:", err)
+		return
 	}
 	log.Info("打印查询的菜单目录", menuList)
+	sysOperaLog := system.SysOperaLog{}
+	sysOperaLog.OperIp = clientIP
+	sysOperaLog.OperLocation, err = tools.GetLocation(clientIP)
+	if err != nil {
+		log.Error("获取外网IP地址失败， err", err)
+		return
+	}
 }

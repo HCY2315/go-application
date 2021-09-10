@@ -4,9 +4,11 @@ settings:
     model: dev
     host: 0.0.0.0
     port: 8008
+    # 使用高德地图中IP定位功能的KEY
+    ip_source_key: f9899f63beeaa5047720b4677b995c80
   logger:
     # 数据库日志开关 dev模式，将自动开启
-    enableddb: false
+    enabled_db: false
   jwt:
     # 认证过期时间(秒)
     timeout: 600

@@ -19,7 +19,7 @@ type SysOperaLog struct {
 	OperName      string    `json:"oper_name" gorm:"type:varchar(128);comment:操作者"`                //
 	DeptName      string    `json:"dept_name" gorm:"type:varchar(128);comment:部门名称"`               //
 	OperUrl       string    `json:"oper_url" gorm:"type:varchar(255);comment:访问地址"`                //
-	OperIp        string    `json:"oper_ip" gorm:"type:varchar(128);comment:客户端ip"`                //
+	OperIp        string    `json:"oper_ip" gorm:"type:varchar(128);comment:客户端ip"`                // 客户端ip
 	OperLocation  string    `json:"oper_location" gorm:"type:varchar(128);comment:访问位置"`           //
 	OperParam     string    `json:"oper_param" gorm:"type:varchar(255);comment:请求参数"`              //
 	Status        string    `json:"status" gorm:"type:varchar(4);comment:操作状态"`                    //

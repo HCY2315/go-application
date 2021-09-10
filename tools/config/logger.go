@@ -3,12 +3,12 @@ package config
 import "github.com/spf13/viper"
 
 type Logger struct {
-	Enableddb string
+	EnabledDB bool `default:"true"`
 }
 
 func InitLogger(cfg *viper.Viper) *Logger {
 	return &Logger{
-		Enableddb: viper.GetString("enableddb"),
+		EnabledDB: viper.GetBool("enabled_db"),
 	}
 }
 
