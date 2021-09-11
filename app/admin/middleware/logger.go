@@ -73,4 +73,8 @@ func SetDBOperLog(c *gin.Context, clientIP string, statusCode int, reqUri string
 		log.Error("获取外网IP地址失败， err", err)
 		return
 	}
+	sysOperaLog.Status = tools.IntToString(statusCode)
+	sysOperaLog.OperName = tools.GetUserName(c)
+	sysOperaLog.RequestMethod = reqMethod
+	sysOperaLog.OperUrl = reqUri
 }

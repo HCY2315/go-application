@@ -10,13 +10,13 @@ type SysOperaLog struct {
 	models.BaseModel
 	models.ControlBy
 
-	Title         string    `json:"title" gorm:"type:varchar(255);comment:操作模块"`                   //
-	BusinessType  string    `json:"business_type" gorm:"type:varchar(128);comment:操作类型"`           //
+	Title         string    `json:"title" gorm:"type:varchar(255);comment:操作模块"`                   // 操作模块
+	BusinessType  string    `json:"business_type" gorm:"type:varchar(128);comment:操作类型"`           // 操作类型
 	BusinessTypes string    `json:"business_types" gorm:"type:varchar(128);comment:BusinessTypes"` //
-	Method        string    `json:"method" gorm:"type:varchar(128);comment:函数"`                    //
+	Method        string    `json:"method" gorm:"type:varchar(128);comment:函数"`                    // 函数
 	RequestMethod string    `json:"request_method" gorm:"type:varchar(128);comment:请求方式"`          //
 	OperatorType  string    `json:"operator_type" gorm:"type:varchar(128);comment:操作类型"`           //
-	OperName      string    `json:"oper_name" gorm:"type:varchar(128);comment:操作者"`                //
+	OperName      string    `json:"oper_name" gorm:"type:varchar(128);comment:操作者"`                // 操作者
 	DeptName      string    `json:"dept_name" gorm:"type:varchar(128);comment:部门名称"`               //
 	OperUrl       string    `json:"oper_url" gorm:"type:varchar(255);comment:访问地址"`                //
 	OperIp        string    `json:"oper_ip" gorm:"type:varchar(128);comment:客户端ip"`                // 客户端ip
