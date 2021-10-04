@@ -9,8 +9,8 @@ import (
 
 // 摘录声明
 func ExtractClaims(c *gin.Context) jwt.MapClaims {
-	claims, ok := c.Get(jwt.JwtPayloadKey)
-	if !ok {
+	claims, exists := c.Get(jwt.JwtPayloadKey)
+	if !exists {
 		return make(map[string]interface{})
 	}
 	return claims.(jwt.MapClaims)
@@ -24,4 +24,14 @@ func GetUserName(c *gin.Context) string {
 	}
 	log.Error(GetCurrentTimeStr() + " [WARING] " + c.Request.Method + " " + c.Request.URL.Path + " GetUserName 缺少nice")
 	return ""
+}
+
+// 获取用户id
+func GetUserIdUint(c *gin.Context) uint {
+	data := ExtractClaims(c)
+	if data["identity"] != nil {
+		return uint((data["identity"]).(float64))
+	}
+	log.Error(GetCurrentTimeStr() + " [WARING] " + c.Request.Method + " " + c.Request.URL.Path + " GetUserId 缺少identity")
+	return 0
 }

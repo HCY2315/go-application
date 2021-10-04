@@ -3,9 +3,11 @@ package middleware
 import (
 	"go-application/app/admin/models"
 	"go-application/app/admin/models/system"
+	"go-application/app/admin/service"
 	"go-application/common/log"
 	"go-application/tools"
 	"go-application/tools/config"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -61,6 +63,8 @@ func SetDBOperLog(c *gin.Context, clientIP string, statusCode int, reqUri string
 	menu.Path = reqUri
 	menu.Action = reqMethod
 	menuList, err := menu.Get()
+
+	// 判断菜单是否存在
 	if err != nil {
 		log.Error("获取菜单数据失败！err:", err)
 		return
@@ -77,4 +81,45 @@ func SetDBOperLog(c *gin.Context, clientIP string, statusCode int, reqUri string
 	sysOperaLog.OperName = tools.GetUserName(c)
 	sysOperaLog.RequestMethod = reqMethod
 	sysOperaLog.OperUrl = reqUri
+	if strings.Contains(reqUri, "/login") {
+		sysOperaLog.BusinessType = "10"
+		sysOperaLog.Title = "用户登录"
+		sysOperaLog.OperName = "-"
+	} else if strings.Contains(reqUri, "/api/v1/logout") {
+		sysOperaLog.BusinessType = "11"
+	} else if strings.Contains(reqUri, "/api/v1/getCaptcha") {
+		sysOperaLog.BusinessType = "12"
+		sysOperaLog.Title = "验证码"
+	} else {
+		if reqMethod == "POST" {
+			sysOperaLog.BusinessType = "1"
+		} else if reqMethod == "PUT" {
+			sysOperaLog.BusinessType = "2"
+		} else if reqMethod == "DELETE" {
+			sysOperaLog.BusinessType = "3"
+		}
+	}
+	sysOperaLog.Method = reqMethod
+	if len(menuList) > 0 {
+		sysOperaLog.Title = menuList[0].Title
+	}
+	b, _ := c.Get("body")
+	sysOperaLog.OperParam, _ = tools.StructToJsonStr(b)
+	sysOperaLog.CreateBy = tools.GetUserIdUint(c)
+	sysOperaLog.OperTime = tools.GetCurrentTime()
+	sysOperaLog.LatencyTime = (latencyTime).String()
+	// UserAgent() 如果在请求中发送，UserAgent将返回客户端的用户代理
+	sysOperaLog.UserAgent = c.Request.UserAgent()
+	// 判断接口返回是否为空
+	if c.Err() == nil {
+		sysOperaLog.Status = "0"
+	} else {
+		sysOperaLog.Status = "1"
+	}
+	msgID := tools.GenerateMsgIDFromContext(c)
+	db, err := tools.GetOrm(c)
+	serviceOperaLog := service.SysOperaLog{}
+	serviceOperaLog.MsgID = msgID
+	serviceOperaLog.Orm = db
+	_ = serviceOperaLog.InsertSysOperaLog(sysOperaLog.Generate())
 }
