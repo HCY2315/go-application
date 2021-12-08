@@ -19,7 +19,8 @@ func AuthJwt() (*jwt.GinJWTMiddleware, error) {
 	}
 
 	return jwt.New(&jwt.GinJWTMiddleware{
-		Realm:           "test zone",                                        // 要显示给用户的时间区域
+		Realm:           "test zone", // 要显示给用户的时间区域
+		Key:             []byte(config.JwtConfig.Secret),
 		Timeout:         timeout,                                            // 认证超时时间
 		MaxRefresh:      time.Hour,                                          // 允许客户端刷新其令牌, 意味着令牌的最大有效时间跨度为TokenTime+MaxRefresh。
 		PayloadFunc:     handler.PayloadFunc,                                // 登录期间将调用的回调函数

@@ -1,4 +1,4 @@
-PROJECT:=admin-server
+PROJECT:=go-application
 
 .PHONY: build
 build:

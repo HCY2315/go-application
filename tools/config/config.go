@@ -22,6 +22,9 @@ var cfgApplication *viper.Viper
 // jwtconfig 配置
 var cfgJwt *viper.Viper
 
+// logger 配置
+var cfglogger *viper.Viper
+
 func Setup(path string) {
 	// 显式定义配置文件的路径、名称和扩展名
 	viper.SetConfigFile(path)
@@ -64,4 +67,10 @@ func Setup(path string) {
 		panic("No found settings.jwtconfig in the configuration")
 	}
 	JwtConfig = InitJwt(cfgJwt)
+
+	cfglogger = viper.Sub("settings.logger")
+	if cfglogger == nil {
+		panic("No found settings.logger in the configuration")
+	}
+	LoggerConfig = InitLogger(cfglogger)
 }

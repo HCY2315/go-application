@@ -42,7 +42,7 @@ func (e *Mysql) Setup() {
 	})
 
 	if err != nil {
-		log.Fatal((tools.Red(e.GetDriver() + " connect error :")), err)
+		log.Fatal((tools.Red(e.GetDriver() + " connect error:")), err)
 	} else {
 		log.Info(tools.Green(e.GetDriver() + " connect success "))
 	}
@@ -67,6 +67,7 @@ func (e *Mysql) RegisterTableModel() {
 	e.models = append(e.models, &models.SysUser{})
 	e.models = append(e.models, &models.OpClassRoom{})
 	e.models = append(e.models, &models.SysRole{})
+	e.models = append(e.models, &models.Menu{})
 }
 
 // 打开数据库连接

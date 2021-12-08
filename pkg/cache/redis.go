@@ -32,6 +32,7 @@ func CreateManager() (*Manager, error) {
 			return c, nil
 		},
 	}
+	// 检测 redis 的连接状态
 	_, err := pool.Dial()
 	if err != nil {
 		return nil, err

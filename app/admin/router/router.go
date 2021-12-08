@@ -23,7 +23,7 @@ func BusinessNoCheckRoleRouter(r *gin.Engine) {
 	v1 := r.Group("/api/v1")
 
 	// 测试接口
-	v1.GET("checknorole", nil)
+	v1.GET("/nilcheckrole", nil)
 
 	for _, f := range routerNoCheckRoleV1 {
 		f(v1)
