@@ -13,6 +13,7 @@ func InitMiddleware(r *gin.Engine) {
 	// 自定义错误处理
 
 	// NoCache is a middleware function that appends headers
+	// NoCache是一个附加头的中间件函数
 
 	// 跨域处理
 
